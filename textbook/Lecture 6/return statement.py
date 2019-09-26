@@ -17,6 +17,9 @@ def positive(x):
 
 print(search(is_three))
 
+def inverse(f):
+            return lambda y: search(lambda x: f(x) == y)
 
+sqrt = inverse(suqare)
 
-            
+print(sqrt(16))         
