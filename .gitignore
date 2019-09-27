@@ -130,3 +130,9 @@ disc/
 lab/lab00/.ok_history
 lab/lab00/.ok_messages
 lab/lab01/
+*.OK
+.ok_history
+.ok_message
+.ok_storage.bak
+.ok_storage.dat
+.ok_storage.dir
