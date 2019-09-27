@@ -12,7 +12,7 @@ def lambda_curry2(func):
     8
     """
     "*** YOUR CODE HERE ***"
-    return ______
+    return lambda x:lambda y:func(x,y)
 
 def count_cond(condition):
     """Returns a function with one parameter N that counts all the numbers from
