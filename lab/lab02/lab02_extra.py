@@ -36,7 +36,12 @@ def composite_identity(f, g):
     False
     """
     "*** YOUR CODE HERE ***"
-
+    def identity(x):
+        if compose1(f, g)(x) == compose1(g, f)(x):
+            return True
+        else:
+            return False
+    return identity
 def cycle(f1, f2, f3):
     """Returns a function that is itself a higher-order function.
 
@@ -64,3 +69,17 @@ def cycle(f1, f2, f3):
     19
     """
     "*** YOUR CODE HERE ***"
+    def count(n):
+        def arg(x):
+            k, total = 1, x
+            while k <= n:
+                if k % 3 == 0:
+                    total = f1(total)
+                elif k % 3 == 1:
+                    total = f2(total)
+                else:
+                    total = f3(total)
+                k += 1
+            return total
+        return arg
+    return count

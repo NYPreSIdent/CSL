@@ -42,3 +42,11 @@ def count_cond(condition):
     8
     """
     "*** YOUR CODE HERE ***"
+    def func(n):
+        i, total = 1, 0
+        while i <= n:
+            if condition(n,i):
+                total += 1
+            i += 1
+        return total
+    return func

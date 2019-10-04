@@ -2,7 +2,7 @@
 
 from dice import six_sided, four_sided, make_test_dice
 from ucb import main, trace, interact
-
+from math import *
 GOAL_SCORE = 100  # The goal of Hog is to score 100 points.
 
 ######################
@@ -21,9 +21,23 @@ def roll_dice(num_rolls, dice=six_sided):
     assert type(num_rolls) == int, 'num_rolls must be an integer.'
     assert num_rolls > 0, 'Must roll at least once.'
     # BEGIN PROBLEM 1
-    "*** YOUR CODE HERE ***"
+    total = 0
+    while num_rolls > 0:
+        sample = total
+        total = dice() + total
+        if abs(sample - total) == 1:
+            if (num_rolls - 1) > 0:
+                (num_rolls - 1) * dice()
+            return 1
+        num_rolls -= 1
+    return total
     # END PROBLEM 1
-
+    '''
+    BUG I met:
+    1.The function can only be used once.
+    2.caution:return can end the while.
+    3.num_rolls need minus wtice when we use if.
+    '''
 
 def free_bacon(score):
     """Return the points scored from rolling 0 dice (Free Bacon).
@@ -32,7 +46,9 @@ def free_bacon(score):
     """
     assert score < 100, 'The game should be over.'
     # BEGIN PROBLEM 2
-    "*** YOUR CODE HERE ***"
+    digit_1, digit_2 = score % 10, score // 10
+    result = 10 - min(digit_1,digit_2)
+    return result
     # END PROBLEM 2
 
 
@@ -50,16 +66,45 @@ def take_turn(num_rolls, opponent_score, dice=six_sided):
     assert num_rolls <= 10, 'Cannot roll more than 10 dice.'
     assert opponent_score < 100, 'The game should be over.'
     # BEGIN PROBLEM 3
-    "*** YOUR CODE HERE ***"
-    # END PROBLEM 3
 
+    if num_rolls == 0:
+        result = free_bacon(opponent_score)
+        return result
+    else:
+        result = roll_dice(num_rolls,dice)
+        return result
+
+    # END PROBLEM 3
 
 def is_swap(player_score, opponent_score):
     """
     Return whether the two scores should be swapped
     """
     # BEGIN PROBLEM 4
-    "*** YOUR CODE HERE ***"
+    my_score, your_score = 1, 1
+    n1, n2 = 1, 1
+    while my_score != 0:
+        if player_score < 10:
+            my_score = player_score ^ 2
+        else:
+            my_score = player_score // n1
+            n1 = n1 * 10
+    n1 = n1 // 100
+    while your_score != 0:
+        if opponent_score < 10:
+            your_score = opponent_score ^ 2
+        else:
+            your_score = opponent_score // n2
+            n2 = n2 * 10
+    n2 = n2 // 100
+    if n1 and n2 != 0:
+        my_score = player_score % 10 * (player_score // n1)
+        your_score = opponent_score % 10 * (opponent_score // n2)
+    if my_score == your_score:
+        return True
+    else:
+        return False
+
     # END PROBLEM 4
 
 
