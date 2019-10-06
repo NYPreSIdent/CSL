@@ -81,25 +81,13 @@ def is_swap(player_score, opponent_score):
     Return whether the two scores should be swapped
     """
     # BEGIN PROBLEM 4
-    my_score, your_score = 1, 1
-    n1, n2 = 1, 1
-    while my_score != 0:
-        if player_score < 10:
-            my_score = player_score ^ 2
-        else:
-            my_score = player_score // n1
-            n1 = n1 * 10
-    n1 = n1 // 100
-    while your_score != 0:
-        if opponent_score < 10:
-            your_score = opponent_score ^ 2
-        else:
-            your_score = opponent_score // n2
-            n2 = n2 * 10
-    n2 = n2 // 100
-    if n1 and n2 != 0:
-        my_score = player_score % 10 * (player_score // n1)
-        your_score = opponent_score % 10 * (opponent_score // n2)
+    my_score, your_score = player_score % 10, opponent_score % 10
+    while player_score >= 10:
+        player_score //= 10
+    while opponent_score >= 10:
+        opponent_score //= 10
+    my_score *= player_score
+    your_score *= opponent_score
     if my_score == your_score:
         return True
     else:
@@ -144,7 +132,7 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     """
     player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-    "*** YOUR CODE HERE ***"
+
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
