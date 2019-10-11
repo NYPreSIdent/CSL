@@ -92,7 +92,6 @@ def is_swap(player_score, opponent_score):
         return True
     else:
         return False
-
     # END PROBLEM 4
 
 
@@ -110,7 +109,6 @@ def other(player):
 def silence(score0, score1):
     """Announce nothing (see Phase 2)."""
     return silence
-
 
 def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
          goal=GOAL_SCORE, say=silence, feral_hogs=True):
@@ -130,9 +128,12 @@ def play(strategy0, strategy1, score0=0, score1=0, dice=six_sided,
     say:        The commentary function to call at the end of the first turn.
     feral_hogs: A boolean indicating whether the feral hogs rule should be active.
     """
-    player = 0  # Which player is about to take a turn, 0 (first) or 1 (second)
+    # Which player is about to take e a turn, 0 (first) or 1 (second)
     # BEGIN PROBLEM 5
-
+    player = 0
+    player0 = take_turn(strategy0(score0,score1),score1,dice) + score0
+    player1 = take_turn(strategy1(score1,score0),score0,dice) + score1
+    score0, score1 = player0, player1   
     # END PROBLEM 5
     # (note that the indentation for the problem 6 prompt (***YOUR CODE HERE***) might be misleading)
     # BEGIN PROBLEM 6
