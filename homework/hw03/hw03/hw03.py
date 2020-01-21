@@ -68,14 +68,13 @@ def pingpong(n):
     True
     """
     "*** YOUR CODE HERE ***"
-    def pingpong_helper(n,direction):
-        if n == 1:
+    def helper(total, i, direction):
+        if i == n:
             return n
-        elif num_sevens(n) > 0 or n % 7 == 0:
-            return pingpong_helper(n - 1,-direction) + direction
-        else:
-            return pingpong_helper(n - 1,direction) + direction
-    return pingpong_helper(n,-1)
+        if num_sevens(n) or total % 7 == 0:
+            return helper(total - direction, i + 1, -direction)
+        return helper(total + direction, i + 1, direction)
+    return helper
 
 
 def count_change(amount):
@@ -95,6 +94,21 @@ def count_change(amount):
     True
     """
     "*** YOUR CODE HERE ***"
+    def divided(s,n):
+        if s > n:
+            return s // 2
+        else:
+            return divided(s * 2, n)
+
+    def helper(m ,n):
+        if m < 0:
+            return 0
+        elif n == 0:
+            return 0
+        elif m == 0:
+            return 1
+        return helper(n - m, m) + helper(m, n // 2)
+    return helper(amount, divided(1, amount))
 
 
 def flatten(lst):
@@ -114,6 +128,15 @@ def flatten(lst):
     [[1, [1, 1]], 1, [1, 1]]
     """
     "*** YOUR CODE HERE ***"
+    def helper(n):
+        if not lst:
+            return []
+        if type(lst[0]) == list:
+            return flatten(lst[0]) + flatten([lst[1:])
+        else:
+            return [lst[0]] + flatten(lst[1:])
+
+
 
 ###################
 # Extra Questions #
@@ -152,6 +175,9 @@ def move_stack(n, start, end):
     """
     assert 1 <= start <= 3 and 1 <= end <= 3 and start != end, "Bad start/end"
     "*** YOUR CODE HERE ***"
+    if n == 1:
+        print_move(1,1,3)
+
 
 from operator import sub, mul
 
